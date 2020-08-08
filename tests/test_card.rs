@@ -1,4 +1,4 @@
-use ionic_deckhandler::DeckShuffler;
+use ionic_deckhandler::Deck;
 
 #[test]
 fn test_create_deck() {

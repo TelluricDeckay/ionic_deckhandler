@@ -96,12 +96,25 @@ impl Card {
     }
 }
 
-pub trait DeckShuffler {
+pub trait Deck {
     fn shuffle_deck(&mut self);
+
+    fn take_from_top(&mut self) -> Option<Card>;
+
+    fn push_to_bottom(&mut self, card: Card);
 }
 
-impl DeckShuffler for Vec<Card> {
+impl Deck for Vec<Card> {
     fn shuffle_deck(&mut self) {
         self.shuffle(&mut thread_rng())
+    }
+
+    fn take_from_top(&mut self) -> Option<Card> {
+        self.pop()
+    }
+
+    fn push_to_bottom(&mut self, card: Card) {
+        let len = self.len();
+        self.insert(len, card);
     }
 }
