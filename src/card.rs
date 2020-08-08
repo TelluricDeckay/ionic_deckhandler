@@ -1,6 +1,6 @@
-use std::fmt;
 use rand::seq::SliceRandom;
 use rand::thread_rng;
+use std::fmt;
 
 mod suit {
     pub struct Suit(&'static str);
@@ -50,7 +50,9 @@ mod card_type {
     const queen: CardType = FaceCardType("Queen");
     const king: CardType = FaceCardType("king");
 
-    pub const card_types: [&CardType; 13] = [&ace, &two, &three, &four, &five, &six, &seven, &eight, &nine, &ten, &jack, &queen, &king];
+    pub const card_types: [&CardType; 13] = [
+        &ace, &two, &three, &four, &five, &six, &seven, &eight, &nine, &ten, &jack, &queen, &king,
+    ];
 }
 
 pub struct Card {
@@ -69,7 +71,10 @@ impl Card {
         let mut deck = Vec::new();
         for suit in suit::suits.iter() {
             for card_type in card_type::card_types.iter() {
-                deck.push(Card{ suit: suit, cardType: card_type });
+                deck.push(Card {
+                    suit: suit,
+                    cardType: card_type,
+                });
             }
         }
         deck
@@ -86,7 +91,7 @@ impl Card {
     pub fn is_facetype(&self) -> bool {
         match *self.cardType {
             card_type::CardType::FaceCardType(..) => true,
-            _ => false
+            _ => false,
         }
     }
 }

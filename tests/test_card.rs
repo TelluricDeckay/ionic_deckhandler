@@ -8,7 +8,7 @@ fn test_create_deck() {
         assert_eq!(format!("{}", first_card.get_suit()), String::from("♣"));
     }
     deck.shuffle_deck();
-    
+
     for card in deck.iter() {
         println!("{}", card);
     }
