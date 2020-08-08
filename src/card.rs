@@ -11,12 +11,12 @@ mod suit {
         }
     }
 
-    const club: Suit = Suit("♣");
-    const diamond: Suit = Suit("♦");
-    const heart: Suit = Suit("♥");
-    const spade: Suit = Suit("♠");
+    const CLUB: Suit = Suit("♣");
+    const DIAMOND: Suit = Suit("♦");
+    const HEART: Suit = Suit("♥");
+    const SPADE: Suit = Suit("♠");
 
-    pub const suits: [&Suit; 4] = [&club, &diamond, &heart, &spade];
+    pub const SUITS: [&Suit; 4] = [&CLUB, &DIAMOND, &HEART, &SPADE];
 }
 
 mod card_type {
@@ -36,44 +36,44 @@ mod card_type {
 
     use CardType::*;
 
-    const ace: CardType = NumCardType("Ace");
-    const two: CardType = NumCardType("Two");
-    const three: CardType = NumCardType("Three");
-    const four: CardType = NumCardType("Four");
-    const five: CardType = NumCardType("Five");
-    const six: CardType = NumCardType("Six");
-    const seven: CardType = NumCardType("Seven");
-    const eight: CardType = NumCardType("Eight");
-    const nine: CardType = NumCardType("Nine");
-    const ten: CardType = NumCardType("Ten");
-    const jack: CardType = FaceCardType("Jack");
-    const queen: CardType = FaceCardType("Queen");
-    const king: CardType = FaceCardType("king");
+    const ACE: CardType = NumCardType("Ace");
+    const TWO: CardType = NumCardType("Two");
+    const THREE: CardType = NumCardType("Three");
+    const FOUR: CardType = NumCardType("Four");
+    const FIVE: CardType = NumCardType("Five");
+    const SIX: CardType = NumCardType("Six");
+    const SEVEN: CardType = NumCardType("Seven");
+    const EIGHT: CardType = NumCardType("Eight");
+    const NINE: CardType = NumCardType("Nine");
+    const TEN: CardType = NumCardType("Ten");
+    const JACK: CardType = FaceCardType("Jack");
+    const QUEEN: CardType = FaceCardType("Queen");
+    const KING: CardType = FaceCardType("king");
 
-    pub const card_types: [&CardType; 13] = [
-        &ace, &two, &three, &four, &five, &six, &seven, &eight, &nine, &ten, &jack, &queen, &king,
+    pub const CARD_TYPES: [&CardType; 13] = [
+        &ACE, &TWO, &THREE, &FOUR, &FIVE, &SIX, &SEVEN, &EIGHT, &NINE, &TEN, &JACK, &QUEEN, &KING,
     ];
 }
 
 pub struct Card {
     suit: &'static suit::Suit,
-    cardType: &'static card_type::CardType,
+    card_type: &'static card_type::CardType,
 }
 
 impl fmt::Display for Card {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{} of {}", self.cardType, self.suit)
+        write!(f, "{} of {}", self.card_type, self.suit)
     }
 }
 
 impl Card {
     pub fn get_deck() -> Vec<Card> {
         let mut deck = Vec::new();
-        for suit in suit::suits.iter() {
-            for card_type in card_type::card_types.iter() {
+        for suit in suit::SUITS.iter() {
+            for card_type in card_type::CARD_TYPES.iter() {
                 deck.push(Card {
                     suit: suit,
-                    cardType: card_type,
+                    card_type: card_type,
                 });
             }
         }
@@ -85,11 +85,11 @@ impl Card {
     }
 
     pub fn get_type(&self) -> &card_type::CardType {
-        self.cardType
+        self.card_type
     }
 
     pub fn is_facetype(&self) -> bool {
-        match *self.cardType {
+        match *self.card_type {
             card_type::CardType::FaceCardType(..) => true,
             _ => false,
         }
