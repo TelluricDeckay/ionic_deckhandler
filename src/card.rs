@@ -2,8 +2,9 @@ use rand::seq::SliceRandom;
 use rand::thread_rng;
 use std::fmt;
 
-mod suit {
-    pub struct Suit(&'static str);
+pub mod suit {
+    #[derive(Debug, PartialEq, Copy, Clone)]
+    pub struct Suit(pub &'static str);
 
     impl super::fmt::Display for Suit {
         fn fmt(&self, f: &mut super::fmt::Formatter<'_>) -> super::fmt::Result {
@@ -11,15 +12,16 @@ mod suit {
         }
     }
 
-    const CLUB: Suit = Suit("♣");
-    const DIAMOND: Suit = Suit("♦");
-    const HEART: Suit = Suit("♥");
-    const SPADE: Suit = Suit("♠");
+    pub const CLUB: Suit = Suit("♣");
+    pub const DIAMOND: Suit = Suit("♦");
+    pub const HEART: Suit = Suit("♥");
+    pub const SPADE: Suit = Suit("♠");
 
     pub const SUITS: [&Suit; 4] = [&CLUB, &DIAMOND, &HEART, &SPADE];
 }
 
-mod card_type {
+pub mod card_type {
+    #[derive(Debug, PartialEq, Copy, Clone)]
     pub enum CardType {
         NumCardType(&'static str, i32),
         FaceCardType(&'static str, i32),
@@ -28,33 +30,34 @@ mod card_type {
     impl super::fmt::Display for CardType {
         fn fmt(&self, f: &mut super::fmt::Formatter<'_>) -> super::fmt::Result {
             match *self {
-                CardType::NumCardType(str_val, i32) => str_val.fmt(f),
-                CardType::FaceCardType(str_val, i32) => str_val.fmt(f),
+                CardType::NumCardType(str_val, val) => write!(f, "{}, {}", str_val, val),
+                CardType::FaceCardType(str_val, val) => write!(f, "{}, {}", str_val, val),
             }
         }
     }
 
     use CardType::*;
 
-    const ACE: CardType = NumCardType("Ace", 1);
-    const TWO: CardType = NumCardType("Two", 2);
-    const THREE: CardType = NumCardType("Three", 3);
-    const FOUR: CardType = NumCardType("Four", 4);
-    const FIVE: CardType = NumCardType("Five", 5);
-    const SIX: CardType = NumCardType("Six", 6);
-    const SEVEN: CardType = NumCardType("Seven", 7);
-    const EIGHT: CardType = NumCardType("Eight", 8);
-    const NINE: CardType = NumCardType("Nine", 9);
-    const TEN: CardType = NumCardType("Ten", 10);
-    const JACK: CardType = FaceCardType("Jack", 11);
-    const QUEEN: CardType = FaceCardType("Queen", 12);
-    const KING: CardType = FaceCardType("king", 13);
+    pub const ACE: CardType = NumCardType("Ace", 1);
+    pub const TWO: CardType = NumCardType("Two", 2);
+    pub const THREE: CardType = NumCardType("Three", 3);
+    pub const FOUR: CardType = NumCardType("Four", 4);
+    pub const FIVE: CardType = NumCardType("Five", 5);
+    pub const SIX: CardType = NumCardType("Six", 6);
+    pub const SEVEN: CardType = NumCardType("Seven", 7);
+    pub const EIGHT: CardType = NumCardType("Eight", 8);
+    pub const NINE: CardType = NumCardType("Nine", 9);
+    pub const TEN: CardType = NumCardType("Ten", 10);
+    pub const JACK: CardType = FaceCardType("Jack", 11);
+    pub const QUEEN: CardType = FaceCardType("Queen", 12);
+    pub const KING: CardType = FaceCardType("king", 13);
 
     pub const CARD_TYPES: [&CardType; 13] = [
         &ACE, &TWO, &THREE, &FOUR, &FIVE, &SIX, &SEVEN, &EIGHT, &NINE, &TEN, &JACK, &QUEEN, &KING,
     ];
 }
 
+#[derive(Debug, PartialEq, Copy, Clone)]
 pub struct Card {
     suit: &'static suit::Suit,
     card_type: &'static card_type::CardType,
@@ -67,6 +70,13 @@ impl fmt::Display for Card {
 }
 
 impl Card {
+    pub fn new(suit: &'static suit::Suit, card_type: &'static card_type::CardType) -> Self {
+        Self {
+            suit: suit,
+            card_type: card_type,
+        }
+    }
+
     pub fn get_deck() -> Vec<Card> {
         let mut deck = Vec::new();
         for suit in suit::SUITS.iter() {
