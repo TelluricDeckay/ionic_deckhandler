@@ -21,34 +21,34 @@ mod suit {
 
 mod card_type {
     pub enum CardType {
-        NumCardType(&'static str),
-        FaceCardType(&'static str),
+        NumCardType(&'static str, i32),
+        FaceCardType(&'static str, i32),
     }
 
     impl super::fmt::Display for CardType {
         fn fmt(&self, f: &mut super::fmt::Formatter<'_>) -> super::fmt::Result {
             match *self {
-                CardType::NumCardType(str_val) => str_val.fmt(f),
-                CardType::FaceCardType(str_val) => str_val.fmt(f),
+                CardType::NumCardType(str_val, i32) => str_val.fmt(f),
+                CardType::FaceCardType(str_val, i32) => str_val.fmt(f),
             }
         }
     }
 
     use CardType::*;
 
-    const ACE: CardType = NumCardType("Ace");
-    const TWO: CardType = NumCardType("Two");
-    const THREE: CardType = NumCardType("Three");
-    const FOUR: CardType = NumCardType("Four");
-    const FIVE: CardType = NumCardType("Five");
-    const SIX: CardType = NumCardType("Six");
-    const SEVEN: CardType = NumCardType("Seven");
-    const EIGHT: CardType = NumCardType("Eight");
-    const NINE: CardType = NumCardType("Nine");
-    const TEN: CardType = NumCardType("Ten");
-    const JACK: CardType = FaceCardType("Jack");
-    const QUEEN: CardType = FaceCardType("Queen");
-    const KING: CardType = FaceCardType("king");
+    const ACE: CardType = NumCardType("Ace", 1);
+    const TWO: CardType = NumCardType("Two", 2);
+    const THREE: CardType = NumCardType("Three", 3);
+    const FOUR: CardType = NumCardType("Four", 4);
+    const FIVE: CardType = NumCardType("Five", 5);
+    const SIX: CardType = NumCardType("Six", 6);
+    const SEVEN: CardType = NumCardType("Seven", 7);
+    const EIGHT: CardType = NumCardType("Eight", 8);
+    const NINE: CardType = NumCardType("Nine", 9);
+    const TEN: CardType = NumCardType("Ten", 10);
+    const JACK: CardType = FaceCardType("Jack", 11);
+    const QUEEN: CardType = FaceCardType("Queen", 12);
+    const KING: CardType = FaceCardType("king", 13);
 
     pub const CARD_TYPES: [&CardType; 13] = [
         &ACE, &TWO, &THREE, &FOUR, &FIVE, &SIX, &SEVEN, &EIGHT, &NINE, &TEN, &JACK, &QUEEN, &KING,
