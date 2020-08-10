@@ -60,30 +60,30 @@ pub mod card_type {
 #[derive(Debug, PartialEq, Copy, Clone)]
 pub struct Card {
     suit: &'static suit::Suit,
-    card_type: &'static card_type::CardType,
+    pub value: &'static card_type::CardType,
 }
 
 impl fmt::Display for Card {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{} of {}", self.card_type, self.suit)
+        write!(f, "{} of {}", self.value, self.suit)
     }
 }
 
 impl Card {
-    pub fn new(suit: &'static suit::Suit, card_type: &'static card_type::CardType) -> Self {
+    pub fn new(suit: &'static suit::Suit, value: &'static card_type::CardType) -> Self {
         Self {
             suit: suit,
-            card_type: card_type,
+            value: value,
         }
     }
 
     pub fn get_deck() -> Vec<Card> {
         let mut deck = Vec::new();
         for suit in suit::SUITS.iter() {
-            for card_type in card_type::CARD_TYPES.iter() {
+            for value in card_type::CARD_TYPES.iter() {
                 deck.push(Card {
                     suit: suit,
-                    card_type: card_type,
+                    value: value,
                 });
             }
         }
@@ -95,11 +95,11 @@ impl Card {
     }
 
     pub fn get_type(&self) -> &card_type::CardType {
-        self.card_type
+        self.value
     }
 
     pub fn is_facetype(&self) -> bool {
-        match *self.card_type {
+        match *self.value {
             card_type::CardType::FaceCardType(..) => true,
             _ => false,
         }
