@@ -1,108 +1,97 @@
 use rand::seq::SliceRandom;
 use rand::thread_rng;
-use std::fmt;
+use std::cmp::Ordering;
 
-pub mod suit {
-    #[derive(Debug, PartialEq, Copy, Clone)]
-    pub struct Suit(pub &'static str);
-
-    impl super::fmt::Display for Suit {
-        fn fmt(&self, f: &mut super::fmt::Formatter<'_>) -> super::fmt::Result {
-            self.0.fmt(f)
-        }
-    }
-
-    pub const CLUB: Suit = Suit("♣");
-    pub const DIAMOND: Suit = Suit("♦");
-    pub const HEART: Suit = Suit("♥");
-    pub const SPADE: Suit = Suit("♠");
-
-    pub const SUITS: [&Suit; 4] = [&CLUB, &DIAMOND, &HEART, &SPADE];
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Rank {
+    Ace,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
 }
 
-pub mod card_type {
-    #[derive(Debug, PartialEq, Copy, Clone)]
-    pub enum CardType {
-        NumCardType(&'static str, i32),
-        FaceCardType(&'static str, i32),
-    }
+pub const ALL_RANKS: [Rank; 13] = [
+    Rank::Ace,
+    Rank::Two,
+    Rank::Three,
+    Rank::Four,
+    Rank::Five,
+    Rank::Six,
+    Rank::Seven,
+    Rank::Eight,
+    Rank::Nine,
+    Rank::Ten,
+    Rank::Jack,
+    Rank::Queen,
+    Rank::King,
+];
 
-    impl super::fmt::Display for CardType {
-        fn fmt(&self, f: &mut super::fmt::Formatter<'_>) -> super::fmt::Result {
-            match *self {
-                CardType::NumCardType(str_val, val) => write!(f, "{}, {}", str_val, val),
-                CardType::FaceCardType(str_val, val) => write!(f, "{}, {}", str_val, val),
-            }
-        }
-    }
-
-    use CardType::*;
-
-    pub const ACE: CardType = NumCardType("Ace", 1);
-    pub const TWO: CardType = NumCardType("Two", 2);
-    pub const THREE: CardType = NumCardType("Three", 3);
-    pub const FOUR: CardType = NumCardType("Four", 4);
-    pub const FIVE: CardType = NumCardType("Five", 5);
-    pub const SIX: CardType = NumCardType("Six", 6);
-    pub const SEVEN: CardType = NumCardType("Seven", 7);
-    pub const EIGHT: CardType = NumCardType("Eight", 8);
-    pub const NINE: CardType = NumCardType("Nine", 9);
-    pub const TEN: CardType = NumCardType("Ten", 10);
-    pub const JACK: CardType = FaceCardType("Jack", 11);
-    pub const QUEEN: CardType = FaceCardType("Queen", 12);
-    pub const KING: CardType = FaceCardType("king", 13);
-
-    pub const CARD_TYPES: [&CardType; 13] = [
-        &ACE, &TWO, &THREE, &FOUR, &FIVE, &SIX, &SEVEN, &EIGHT, &NINE, &TEN, &JACK, &QUEEN, &KING,
-    ];
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Suit {
+    Clubs,
+    Diamonds,
+    Hearts,
+    Spades,
 }
 
-#[derive(Debug, PartialEq, Copy, Clone)]
+pub const ALL_SUITS: [Suit; 4] = [Suit::Clubs, Suit::Diamonds, Suit::Hearts, Suit::Spades];
+
+#[derive(Debug, Copy, Clone)]
 pub struct Card {
-    suit: &'static suit::Suit,
-    pub value: &'static card_type::CardType,
-}
-
-impl fmt::Display for Card {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{} of {}", self.value, self.suit)
-    }
+    rank: Rank,
+    suit: Suit,
 }
 
 impl Card {
-    pub fn new(suit: &'static suit::Suit, value: &'static card_type::CardType) -> Self {
-        Self {
-            suit: suit,
-            value: value,
-        }
+    pub fn new(rank: Rank, suit: Suit) -> Self {
+        Card { rank, suit }
     }
 
-    pub fn get_deck() -> Vec<Card> {
+    pub fn get_deck() -> Vec<Self> {
         let mut deck = Vec::new();
-        for suit in suit::SUITS.iter() {
-            for value in card_type::CARD_TYPES.iter() {
-                deck.push(Card {
-                    suit: suit,
-                    value: value,
-                });
+        for suit in ALL_SUITS.iter() {
+            for rank in ALL_RANKS.iter() {
+                deck.push(Card::new(rank.clone(), suit.clone()));
             }
         }
         deck
     }
 
-    pub fn get_suit(&self) -> &suit::Suit {
+    pub fn get_suit(&self) -> Suit {
         self.suit
     }
 
-    pub fn get_type(&self) -> &card_type::CardType {
-        self.value
+    pub fn get_rank(&self) -> Rank {
+        self.rank
     }
+}
 
-    pub fn is_facetype(&self) -> bool {
-        match *self.value {
-            card_type::CardType::FaceCardType(..) => true,
-            _ => false,
-        }
+impl Ord for Card {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.rank.cmp(&other.rank)
+    }
+}
+
+impl PartialOrd for Card {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Eq for Card {}
+
+impl PartialEq for Card {
+    fn eq(&self, other: &Self) -> bool {
+        self.rank == other.rank
     }
 }
 
