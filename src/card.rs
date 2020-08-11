@@ -1,6 +1,5 @@
 use rand::seq::SliceRandom;
 use rand::thread_rng;
-use std::fmt;
 use std::cmp::Ordering;
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
@@ -44,12 +43,7 @@ pub enum Suit {
     Spades,
 }
 
-pub const ALL_SUITS: [Suit; 4] = [
-    Suit::Clubs,
-    Suit::Diamonds,
-    Suit::Hearts,
-    Suit::Spades,
-];
+pub const ALL_SUITS: [Suit; 4] = [Suit::Clubs, Suit::Diamonds, Suit::Hearts, Suit::Spades];
 
 #[derive(Debug, Copy, Clone)]
 pub struct Card {
@@ -59,12 +53,9 @@ pub struct Card {
 
 impl Card {
     pub fn new(rank: Rank, suit: Suit) -> Self {
-        Card {
-            rank,
-            suit
-        }
+        Card { rank, suit }
     }
-    
+
     pub fn get_deck() -> Vec<Self> {
         let mut deck = Vec::new();
         for suit in ALL_SUITS.iter() {
@@ -96,7 +87,7 @@ impl PartialOrd for Card {
     }
 }
 
-impl Eq for Card { }
+impl Eq for Card {}
 
 impl PartialEq for Card {
     fn eq(&self, other: &Self) -> bool {
