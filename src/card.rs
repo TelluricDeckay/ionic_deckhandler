@@ -19,7 +19,10 @@ pub enum Rank {
     King,
 }
 
-pub const ALL_RANKS: [Rank; 13] = [
+/// The total number of ranks within the deck of cards
+pub const CARD_RANK_COUNT: usize = 13;
+
+pub const ALL_RANKS: [Rank; CARD_RANK_COUNT] = [
     Rank::Ace,
     Rank::Two,
     Rank::Three,
