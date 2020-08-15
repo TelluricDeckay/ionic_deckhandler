@@ -2,6 +2,28 @@ use rand::seq::SliceRandom;
 use rand::thread_rng;
 use std::cmp::Ordering;
 
+/// Provides a rank (value)
+///
+/// Examples:
+///
+/// ```
+/// use ionic_deckhandler::{Card, Suit, Rank};
+///
+/// let card = Card::new(Rank::Five, Suit::Hearts);
+/// let ucard_rank = Card::get_rank(&card) as usize;
+/// ```
+///
+/// ```
+/// use ionic_deckhandler::{Card, Suit, Rank};
+///
+/// let mut hand_arr = [
+///     Card::new(Rank::Five, Suit::Hearts),
+///     Card::new(Rank::Three, Suit::Hearts),
+///     Card::new(Rank::Two, Suit::Hearts),
+///     Card::new(Rank::Ace, Suit::Hearts),
+///     Card::new(Rank::Four, Suit::Hearts),
+///     ];
+/// ```
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Rank {
     Ace,
@@ -38,6 +60,28 @@ pub const ALL_RANKS: [Rank; CARD_RANK_COUNT] = [
     Rank::King,
 ];
 
+/// Provides a card suit
+///
+/// Examples:
+///
+/// ```
+/// use ionic_deckhandler::{Card, Suit, Rank};
+///
+/// let card = Card::new(Rank::Five, Suit::Hearts);
+/// let ucard_suit = Card::get_suit(&card) as usize;
+/// ```
+///
+/// ```
+/// use ionic_deckhandler::{Card, Suit, Rank};
+///
+/// let mut hand_arr = [
+///     Card::new(Rank::Five, Suit::Hearts),
+///     Card::new(Rank::Three, Suit::Hearts),
+///     Card::new(Rank::Two, Suit::Hearts),
+///     Card::new(Rank::Ace, Suit::Hearts),
+///     Card::new(Rank::Four, Suit::Hearts),
+///     ];
+/// ```
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Suit {
     Clubs,
@@ -48,6 +92,25 @@ pub enum Suit {
 
 pub const ALL_SUITS: [Suit; 4] = [Suit::Clubs, Suit::Diamonds, Suit::Hearts, Suit::Spades];
 
+/// A card containing a rank (card value) and a suit. A card may be compared
+/// by value against other cards.
+///
+/// Examples:
+///
+/// ```
+/// use ionic_deckhandler::{Card, Suit, Rank};
+///
+/// let mut hand_arr = [
+///     Card::new(Rank::Five, Suit::Hearts),
+///     Card::new(Rank::Three, Suit::Hearts),
+///     Card::new(Rank::Two, Suit::Hearts),
+///     Card::new(Rank::Ace, Suit::Hearts),
+///     Card::new(Rank::Four, Suit::Hearts),
+///     ];
+///
+/// hand_arr.sort();
+/// ```
+///
 #[derive(Debug, Copy, Clone)]
 pub struct Card {
     rank: Rank,
@@ -98,6 +161,31 @@ impl PartialEq for Card {
     }
 }
 
+/// A deck may be shuffled and sorted
+///
+/// Example:
+///
+/// ```
+/// use ionic_deckhandler::{Card, Deck};
+///
+/// let mut deck = Card::get_deck();
+/// {
+///     let first_card = &deck[0];
+///     assert_eq!(
+///         format!("{:?}", first_card.get_suit()),
+///         String::from("Clubs")
+///     );
+/// }
+/// deck.shuffle_deck();
+///
+/// for card in deck.iter() {
+///     println!("{:?}", card);
+/// }
+/// deck.sort();
+/// for card in deck.iter() {
+///     println!("{:?}", card);
+/// }
+/// ```
 pub trait Deck {
     fn shuffle_deck(&mut self);
 
