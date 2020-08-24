@@ -113,8 +113,8 @@ pub const ALL_SUITS: [Suit; 4] = [Suit::Clubs, Suit::Diamonds, Suit::Hearts, Sui
 ///
 #[derive(Debug, Copy, Clone)]
 pub struct Card {
-    rank: Rank,
-    suit: Suit,
+    pub rank: Rank,
+    pub suit: Suit,
 }
 
 impl Card {
