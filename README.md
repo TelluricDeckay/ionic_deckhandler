@@ -1,9 +1,13 @@
 [![Rust](https://github.com/TelluricDeckay/ionic-deckhandler/workflows/Rust/badge.svg?branch=trunk)](https://github.com/TelluricDeckay/ionic-deckhandler/actions?query=workflow%3ARust)
+[![crates-badge]][crates-url]
+
+[crates-badge]: https://img.shields.io/crates/v/ionic-deckhandler.svg
+[crates-url]: https://crates.io/crates/ionic-deckhandler
 
 Ionic Deckhandler
 ==================
 
-Rust implementation of a deck creation and shuffling library
+Rust implementation of a deck creation and card shuffling library
 
 ## Examples
 
@@ -50,3 +54,15 @@ let mut hand_arr = [
 
 hand_arr.sort();
 ```
+
+## Contributing
+
+See
+[CONTRIBUTING.md](https://github.com/TelluricDeckay/ionic-deckhandler/blob/trunk/CONTRIBUTING.md)
+
+## Help and Support
+
+* [Issues](https://github.com/TelluricDeckay/ionic-deckhandler/issues)
+* [Chat room](https://telluric-deckay.zulipchat.com/)
+* Emails listed in [Cargo.toml](https://github.com/TelluricDeckay/ionic-deckhandler/blob/trunk/Cargo.toml)
+

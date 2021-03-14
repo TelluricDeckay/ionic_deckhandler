@@ -19,7 +19,7 @@ dependencies = [
 
 [[package]]
 name = "ionic_deckhandler"
-version = "0.1.0-dev"
+version = "0.1.0"
 dependencies = [
  "rand",
 ]
