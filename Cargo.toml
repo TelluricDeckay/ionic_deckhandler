@@ -8,6 +8,7 @@ description = "Rust implementation of a deck creation and card shuffling library
 homepage = "https://github.com/TelluricDeckay/ionic-deckhandler"
 repository = "https://github.com/TelluricDeckay/ionic-deckhandler"
 readme = "README.md"
+documentation = "https://docs.rs/ionic_deckhandler"
 
 keywords = ["cards", "simulation", "chance", "library", "gamedev"]
 categories = ["game-development", "simulation"]

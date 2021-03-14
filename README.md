@@ -1,8 +1,8 @@
 [![Rust](https://github.com/TelluricDeckay/ionic-deckhandler/workflows/Rust/badge.svg?branch=trunk)](https://github.com/TelluricDeckay/ionic-deckhandler/actions?query=workflow%3ARust)
 [![crates-badge]][crates-url]
 
-[crates-badge]: https://img.shields.io/crates/v/ionic-deckhandler.svg
-[crates-url]: https://crates.io/crates/ionic-deckhandler
+[crates-badge]: https://img.shields.io/crates/v/ionic_deckhandler.svg
+[crates-url]: https://crates.io/crates/ionic_deckhandler
 
 Ionic Deckhandler
 ==================
@@ -54,6 +54,11 @@ let mut hand_arr = [
 
 hand_arr.sort();
 ```
+
+## Documentation
+
+See [docs.rs/ionic-deckhandler/](https://docs.rs/ionic_deckhandler/)
+for generated API documentation.
 
 ## Contributing
 
