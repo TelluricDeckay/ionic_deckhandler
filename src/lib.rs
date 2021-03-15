@@ -125,7 +125,7 @@ impl Card {
         let mut deck = Vec::new();
         for suit in ALL_SUITS.iter() {
             for rank in ALL_RANKS.iter() {
-                deck.push(Card::new(rank.clone(), suit.clone()));
+                deck.push(Card::new(*rank, *suit));
             }
         }
         deck
