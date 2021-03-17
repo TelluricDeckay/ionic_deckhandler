@@ -37,7 +37,7 @@ for card in deck.iter() {
 use ionic_deckhandler::{Card, Suit, Rank};
 
 let card = Card::new(Rank::Five, Suit::Hearts);
-let ucard_rank = Card::get_suit(&card) as usize;
+let ucard_rank = Card::get_rank(&card) as usize;
 let ucard_suit = Card::get_suit(&card) as usize;
 ```
 
