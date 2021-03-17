@@ -5,7 +5,7 @@
 [crates-url]: https://crates.io/crates/ionic_deckhandler
 
 Ionic Deckhandler
-==================
+=================
 
 Rust implementation of a deck creation and card shuffling library
 
