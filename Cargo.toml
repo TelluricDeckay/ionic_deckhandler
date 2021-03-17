@@ -5,8 +5,8 @@ authors = ["Andy Alt <andy400-dev@yahoo.com>", "Jammyjamjamman <jdsherratt3@gmai
 edition = "2018"
 license = "MIT OR Apache-2.0"
 description = "Rust implementation of a deck creation and card shuffling library"
-homepage = "https://github.com/TelluricDeckay/ionic-deckhandler"
-repository = "https://github.com/TelluricDeckay/ionic-deckhandler"
+homepage = "https://github.com/TelluricDeckay/ionic_deckhandler"
+repository = "https://github.com/TelluricDeckay/ionic_deckhandler"
 readme = "README.md"
 documentation = "https://docs.rs/ionic_deckhandler"
 
