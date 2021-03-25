@@ -1,0 +1,10 @@
+ionic_deckhandler ChangeLog
+
+2021 March 25
+
+* Removed Cargo.lock from the distribution and version control
+(https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)
+
+2021 March 17
+
+* Released v0.1.0
