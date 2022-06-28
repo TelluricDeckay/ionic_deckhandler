@@ -17,4 +17,4 @@ categories = ["game-development", "simulation"]
 # publish = false
 
 [dependencies]
-rand = "0.7"
+rand = "0.8.5"
