@@ -68,6 +68,5 @@ See
 ## Help and Support
 
 * [Issues](https://github.com/TelluricDeckay/ionic_deckhandler/issues)
-* [Chat room](https://telluric-deckay.zulipchat.com/)
 * Emails listed in [Cargo.toml](https://github.com/TelluricDeckay/ionic_deckhandler/blob/trunk/Cargo.toml)
 
